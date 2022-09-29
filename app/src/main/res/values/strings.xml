@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Healthy Life</string>
+    <string name="registration">Зарегистрироваться</string>
+    <string name="or_registration_with">или зарегистрироваться с помощью</string>
+    <string name="email_hint">Почта</string>
+    <string name="password_hint">Пароль</string>
+    <string name="btnCreateAkk">Создать аккаунт</string>
+    <string name="oneCheckBox">Я согласен с условиями обработки данных</string>
+    <string name="enter_text">Войти</string>
+    <string name="enter_text_one">или войти с помощью</string>
 </resources>
