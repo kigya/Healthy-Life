@@ -77,4 +77,20 @@ object Dependencies {
         const val core = "androidx.datastore:datastore-preferences:$version"
     }
 
+    object Retrofit {
+        private const val version = "2.9.0"
+        const val core = "com.squareup.retrofit2:retrofit:$version"
+        const val moshi = "com.squareup.retrofit2:converter-moshi:$version"
+    }
+
+    object OkHttp {
+        private const val version = "4.9.3"
+        const val core = "com.squareup.okhttp3:okhttp:$version"
+        const val logging = "com.squareup.okhttp3:logging-interceptor:$version"
+    }
+
+    object Activity {
+        private const val version = "1.6.0"
+        const val ktx = "androidx.activity:activity-ktx:$version"
+    }
 }

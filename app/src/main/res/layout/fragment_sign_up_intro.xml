@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_parent"
+    tools:context="com.exlab.healthylife.ui.screens.signup.SignUpFragmentIntro"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        style="@style/wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/margin_minor" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        style="@style/wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/margin_minor" />
+
+    <ImageView
+        android:id="@+id/ivSecure"
+        style="@style/wrap_content"
+        android:layout_marginBottom="225dp"
+        android:contentDescription="@string/image_secure"
+        android:src="@drawable/image_secure"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:viewBindingIgnore="true" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegister"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="@dimen/margin_major"
+        android:backgroundTint="@color/blue_base"
+        android:fontFamily="@font/lato"
+        android:text="@string/register"
+        android:textAllCaps="false"
+        android:textColor="@color/white_base"
+        android:textSize="16sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/ivSecure" />
+
+    <TextView
+        android:id="@+id/tvOrRegisterWith"
+        style="@style/wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/or_register_with"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/btnRegister"
+        tools:viewBindingIgnore="true" />
+
+    <ImageButton
+        android:id="@+id/ivVk"
+        style="@style/wrap_content"
+        android:layout_marginTop="@dimen/margin_minor"
+        android:layout_marginEnd="@dimen/margin_minor"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/vk_clickable_icon"
+        android:src="@drawable/vk"
+        app:layout_constraintEnd_toStartOf="@id/ivGoogle"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/tvOrRegisterWith" />
+
+    <ImageButton
+        android:id="@+id/ivGoogle"
+        style="@style/wrap_content"
+        android:layout_marginTop="@dimen/margin_minor"
+        android:layout_marginEnd="@dimen/margin_minor"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/google_clickable_icon"
+        android:src="@drawable/google"
+        app:layout_constraintEnd_toStartOf="@id/ivYandex"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/ivVk"
+        app:layout_constraintTop_toBottomOf="@id/tvOrRegisterWith" />
+
+    <ImageButton
+        android:id="@+id/ivYandex"
+        style="@style/wrap_content"
+        android:layout_marginTop="@dimen/margin_minor"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/yandex_clickable_icon"
+        android:src="@drawable/ya"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/ivGoogle"
+        app:layout_constraintTop_toBottomOf="@id/tvOrRegisterWith" />
+
+    <TextView
+        android:id="@+id/tvAlreadyHaveAccount"
+        style="@style/wrap_content"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:text="@string/already_have_an_account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvcLogIn"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/ivGoogle"
+        tools:viewBindingIgnore="true" />
+
+    <TextView
+        android:id="@+id/tvcLogIn"
+        style="@style/wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/log_in_underlined"
+        android:textColor="@color/blue_base"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/tvAlreadyHaveAccount"
+        app:layout_constraintTop_toBottomOf="@id/ivGoogle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

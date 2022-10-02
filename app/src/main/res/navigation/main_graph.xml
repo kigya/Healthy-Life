@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/main_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/signUpFragmentIntro">
 
+    <fragment
+        android:id="@+id/signUpFragmentIntro"
+        android:name="com.exlab.healthylife.ui.screens.signup.SignUpFragmentIntro"
+        tools:layout="@layout/fragment_sign_up_intro">
+        <action
+            android:id="@+id/action_signUpFragmentIntro_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.exlab.healthylife.ui.screens.signup.SignUpFragment"
+        tools:layout="@layout/fragment_sign_up" />
 </navigation>

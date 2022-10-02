@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        style="@style/wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/margin_minor" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        style="@style/wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/margin_minor" />
+
+    <ImageView
+        android:id="@+id/ivNoConnection"
+        style="@style/wrap_content"
+        android:layout_marginBottom="225dp"
+        android:contentDescription="@string/no_connection_icon"
+        android:src="@drawable/internet_connection"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignoreViewBinding="true" />
+
+    <TextView
+        android:id="@+id/tvSomethingWentWrong"
+        style="@style/wrap_content"
+        android:text="@string/something_went_wrong"
+        android:textColor="@color/black_base"
+        android:textSize="@dimen/text_size_major"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivNoConnection"
+        tools:ignoreViewBinding="true" />
+
+    <TextView
+        android:id="@+id/tvPossibleError"
+        style="@style/wrap_content"
+        android:layout_marginTop="@dimen/text_margin_default"
+        android:text="@string/we_are_figuring_out"
+        android:textColor="@color/black_base"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSomethingWentWrong"
+        tools:ignoreViewBinding="true" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnError"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="@dimen/margin_major"
+        android:backgroundTint="@color/blue_base"
+        android:fontFamily="@font/lato"
+        android:text="@string/log_in"
+        android:textAllCaps="false"
+        android:textColor="@color/white_base"
+        android:textSize="16sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/tvPossibleError" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

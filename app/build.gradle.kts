@@ -23,7 +23,10 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -44,7 +47,7 @@ dependencies {
     implementation(Dependencies.Constraint.contsraint)
     testImplementation(Dependencies.JUnit.junit)
     androidTestImplementation(Dependencies.JUnit.ext)
-    androidTestImplementation (Dependencies.Espresso.core)
+    androidTestImplementation(Dependencies.Espresso.core)
 
     implementation(Dependencies.Coroutines.core)
     implementation(Dependencies.Coroutines.android)
@@ -69,4 +72,10 @@ dependencies {
 
     implementation(Dependencies.DataStorePreferences.core)
 
+    implementation(Dependencies.Retrofit.core)
+    implementation(Dependencies.Retrofit.moshi)
+    implementation(Dependencies.OkHttp.core)
+    implementation(Dependencies.OkHttp.logging)
+
+    implementation(Dependencies.Activity.ktx)
 }

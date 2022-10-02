@@ -15,6 +15,18 @@
         <item name="actionOverflowButtonStyle">@id/invisible</item>
         <item name="android:background">@color/white_base</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/text_size_minor</item>
+        <item name="android:textColor">@color/dark_gray</item>
     </style>
+
+    <style name="wrap_content" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="match_parent" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
 </resources>
