@@ -30,7 +30,6 @@ class AccountsRepository @Inject constructor(
     }
 
     suspend fun signUp(account:Account) {
-        account.validate()
         try {
             accountsSource.signUp(account)
         } catch (e: BackendException) {

@@ -2,20 +2,28 @@ package com.exlab.healthylife.ui.screens.signup
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.exlab.healthylife.R
+import com.exlab.healthylife.api.AccountsApi
 import com.exlab.healthylife.app.base.ui.BaseFragment
 import com.exlab.healthylife.databinding.FragmentSignUpBinding
 import com.exlab.healthylife.models.Account
+import com.exlab.healthylife.utils.Constants
 import com.exlab.healthylife.utils.observeEvent
+import com.exlab.healthylife.utils.validators.EmailValidator
+import com.exlab.healthylife.utils.validators.PasswordValidator
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
@@ -30,40 +38,101 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
         observeShowSuccessSignUpMessageEvent()
 
         with(viewBinding) {
-            bBack.setOnClickListener { findNavController().popBackStack() }
-
-            // (?=.*[a-z]) - at least one lowercase letter
-            // (?=.*\\d) - at least one numeric value.
-            // (?=.*[A-Z]) - at least one uppercase letter
-            // text.length >= 8 - at least 8 characters
-
-            etPassword.doOnTextChanged { text, start, before, count ->
-                groupPasswordHints.isVisible = !text.isNullOrEmpty()
-                val (uppercaseValid, lowercaseValid, digitValid, lengthValid) = listOf(
-                    text?.contains(Regex("(?=.*[A-Z])")) ?: false,
-                    text?.contains(Regex("(?=.*[a-z])")) ?: false,
-                    text?.contains(Regex("(?=.*\\d)")) ?: false,
-                    (text?.length ?: 0) >= 8
+           viewModel.signUp(Account(email = "hfhdjds@gmail.com", password = "sjsjsjsHqqh1"))
+            addBackButtonAction()
+            observeEmail()
+            observeEmailFocus()
+            observePassword()
+            observeDataProcessing()
+            observeAgreePolicy()
+            observeTripleValid()
+            bCreateAccount.setOnClickListener {
+                val accountData = Account(
+                    email = etEmail.text.toString(),
+                    password = etPassword.text.toString()
                 )
-                if (uppercaseValid) {
-                    tvCapitalLetterRequirement.apply {
-                        setTextColor(requireContext().getColor(R.color.blue_base))
-                        setCompoundDrawablesWithIntrinsicBounds(
-                            R.drawable.tick_icon, 0, 0, 0
-                        )
-                    }
-                } else {
-                    tvCapitalLetterRequirement.apply {
-                        setTextColor(requireContext().getColor(R.color.dark_gray))
-                        setCompoundDrawablesWithIntrinsicBounds(
-                            R.drawable.round_icon, 0, 0, 0
-                        )
-                    }
-                }
+                viewModel.signUp(accountData)
             }
         }
+    }
 
+    private fun FragmentSignUpBinding.addBackButtonAction() {
+        bBack.setOnClickListener { findNavController().popBackStack() }
+    }
 
+    private fun FragmentSignUpBinding.observeAgreePolicy() {
+        cbAgreePolicy.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.setAgreePolicyActivated(isChecked)
+        }
+    }
+
+    private fun FragmentSignUpBinding.observeEmailFocus() {
+        etEmail.onFocusChangeListener = onFocusChangeListener()
+    }
+
+    private fun FragmentSignUpBinding.onFocusChangeListener() =
+        View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus && !EmailValidator.isValidEmail(etEmail.text.toString())) tilEmail.error =
+                getString(R.string.error_email) else tilEmail.error = null
+        }
+
+    private fun FragmentSignUpBinding.observeEmail() {
+        etEmail.doOnTextChanged { text, _, _, _ ->
+            val isRegexMatchesPattern = EmailValidator.isValidEmail(text)
+            viewModel.setEmailValid(isRegexMatchesPattern)
+        }
+    }
+
+    private fun FragmentSignUpBinding.observeDataProcessing() {
+        cbAgreeDataProcessing.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.setAgreeDataProcessingActivated(isChecked)
+        }
+    }
+
+    private fun FragmentSignUpBinding.observePassword() {
+        etPassword.doOnTextChanged { text, _, _, _ ->
+            val (uppercaseValid, lowercaseValid, digitValid, lengthValid) = listOf(
+                PasswordValidator.isContainsUppercaseLetter(text.toString()),
+                PasswordValidator.isContainsLowercaseLetter(text.toString()),
+                PasswordValidator.isContainsDigit(text.toString()),
+                PasswordValidator.isValidLength(text.toString())
+            )
+            tvCapitalLetterRequirement.apply { if (uppercaseValid) setValidDrawable() else setInvalidDrawable() }
+            tvLowercaseLetterRequirement.apply { if (lowercaseValid) setValidDrawable() else setInvalidDrawable() }
+            tvDigitRequirement.apply { if (digitValid) setValidDrawable() else setInvalidDrawable() }
+            tvCharsAmountRequirement.apply { if (lengthValid) setValidDrawable() else setInvalidDrawable() }
+
+            viewModel.setPasswordValid(uppercaseValid && lowercaseValid && digitValid && lengthValid)
+        }
+    }
+
+    private fun FragmentSignUpBinding.observeTripleValid() {
+        viewModel.fieldsTripleValid.observe(viewLifecycleOwner) {
+            bCreateAccount.apply {
+                isClickable =
+                    if (it.first?.first == true && it.first?.second == true && it.second == true && it.third == true) {
+                        setBackgroundColor(requireContext().getColor(R.color.blue_base))
+                        true
+                    } else {
+                        setBackgroundColor(requireContext().getColor(R.color.dark_gray))
+                        false
+                    }
+            }
+        }
+    }
+
+    private fun TextView.setInvalidDrawable() {
+        setTextColor(requireContext().getColor(R.color.dark_gray))
+        setCompoundDrawablesWithIntrinsicBounds(
+            R.drawable.round_icon, 0, 0, 0
+        )
+    }
+
+    private fun TextView.setValidDrawable() {
+        setTextColor(requireContext().getColor(R.color.blue_base))
+        setCompoundDrawablesWithIntrinsicBounds(
+            R.drawable.tick_icon, 0, 0, 0
+        )
     }
 
     private fun onCreateAccountButtonPressed() {
@@ -78,9 +147,6 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
         viewBinding.tilEmail.isEnabled = state.enableViews
         viewBinding.tilPassword.isEnabled = state.enableViews
 
-        fillError(viewBinding.tilEmail, state.emailErrorMessageRes)
-        fillError(viewBinding.tilPassword, state.passwordErrorMessageRes)
-
         viewBinding.progressBar.visibility =
             if (state.showProgress) View.VISIBLE else View.INVISIBLE
     }
@@ -90,18 +156,9 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         }
 
-    private fun fillError(input: TextInputLayout, @StringRes stringRes: Int) {
-        if (stringRes == SignUpViewModel.NO_ERROR_MESSAGE) {
-            input.error = null
-            input.isErrorEnabled = false
-        } else {
-            input.error = getString(stringRes)
-            input.isErrorEnabled = true
-        }
-    }
-
     private fun observeGoBackEvent() = viewModel.goBackEvent.observeEvent(viewLifecycleOwner) {
         findNavController().popBackStack()
     }
 
 }
+

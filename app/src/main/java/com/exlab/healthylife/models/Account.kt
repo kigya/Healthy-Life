@@ -1,14 +1,12 @@
 package com.exlab.healthylife.models
 
-import com.exlab.healthylife.utils.EmptyFieldException
+import com.squareup.moshi.Json
+
 
 data class Account(
+    @Json(name="email")
     val email: String,
+    @Json(name="password")
     val password: String
-) {
-    fun validate() {
-        if (email.isBlank()) throw EmptyFieldException(UserField.Email)
-        if (password.isBlank()) throw EmptyFieldException(UserField.Password)
-    }
-}
+)
 

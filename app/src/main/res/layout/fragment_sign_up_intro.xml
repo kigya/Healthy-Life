@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/match_parent"
     tools:context="com.exlab.healthylife.ui.screens.signup.SignUpFragmentIntro"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="@color/white_base">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"
@@ -97,7 +98,7 @@
     <TextView
         android:id="@+id/tvAlreadyHaveAccount"
         style="@style/wrap_content"
-        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/text_margin_default"
         android:text="@string/already_have_an_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tvcLogIn"

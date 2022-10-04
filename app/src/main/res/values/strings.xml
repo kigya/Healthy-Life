@@ -40,4 +40,5 @@
     <string name="account_already_exists">Аккаунт уже существует</string>
     <string name="sign_up_success">Готово!</string>
     <string name="action_logout">Выйти</string>
+    <string name="error_email">Неверный адрес</string>
 </resources>

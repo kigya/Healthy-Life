@@ -12,8 +12,14 @@ import javax.inject.Singleton
 class RetrofitAccountsSource @Inject constructor(
     config: RetrofitConfig
 ) : BaseRetrofitSource(config), AccountsSource {
-    override suspend fun signUp(account: Account) {
+
+    private val accountsApi = retrofit.create(AccountsApi::class.java)
+
+    override suspend fun signUp(
+        account: Account
+    ) = wrapRetrofitExceptions {
         delay(1000)
+        accountsApi.signUp(account)
     }
 
     override suspend fun getAccount(): Account {

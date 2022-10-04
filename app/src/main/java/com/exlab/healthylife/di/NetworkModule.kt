@@ -1,7 +1,8 @@
 package com.exlab.healthylife.di
 
 import com.exlab.healthylife.app.settings.AppSettings
-import com.exlab.healthylife.utils.Const
+import com.exlab.healthylife.utils.Constants
+import com.google.gson.Gson
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -43,7 +44,7 @@ class NetworkModule {
     @Singleton
     fun provideRetrofit(client: OkHttpClient, moshi: Moshi): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Const.BASE_URL)
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(client)
             .build()

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/match_parent"
     android:fillViewport="true"
-    tools:context="com.exlab.healthylife.ui.screens.signup.SignUpFragment">
+    tools:context="com.exlab.healthylife.ui.screens.signup.SignUpFragment"
+    android:background="@color/white_base">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -47,15 +48,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
+            app:boxStrokeColor="@color/light_gray"
+            app:hintTextColor="@color/blue_base"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:counterOverflowTextColor="@color/blue_base"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@id/bBack"
-            app:placeholderText="example@example.com">
+            app:placeholderText="johndoe@gmail.com">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textCursorDrawable="@color/blue_base"
+                android:textColorHighlight="@color/light_gray"
                 android:hint="@string/email_hint"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
@@ -69,18 +75,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
+            app:boxStrokeColor="@color/light_gray"
+            app:hintTextColor="@color/blue_base"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@id/tilEmail"
-            app:placeholderText="example@example.com">
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/blue_base">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
                 android:lines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -138,7 +147,7 @@
         <androidx.constraintlayout.widget.Group
             android:id="@+id/groupPasswordHints"
             style="@style/wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             app:constraint_referenced_ids="
             tvCapitalLetterRequirement,
             tvCharsAmountRequirement,
@@ -162,6 +171,7 @@
             style="@style/wrap_content"
             android:buttonTint="@color/blue_base"
             android:text="@string/i_agree_with"
+            android:layout_marginTop="@dimen/margin_minor"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@id/barrierHints" />
 
@@ -199,6 +209,7 @@
             android:layout_height="60dp"
             android:layout_marginBottom="@dimen/margin_medium"
             android:backgroundTint="@color/light_gray"
+            android:clickable="false"
             android:text="@string/create_an_account"
             android:textAllCaps="false"
             android:textColor="@color/white_base"
@@ -210,7 +221,7 @@
         <TextView
             android:id="@+id/tvAlreadyHaveAccount"
             style="@style/wrap_content"
-            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/text_margin_default"
             android:layout_marginBottom="@dimen/margin_major"
             android:text="@string/already_have_an_account"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -237,10 +248,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bCreateAccount"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cbAgreePolicy"
-            app:layout_constraintBottom_toTopOf="@id/bCreateAccount"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cbAgreePolicy" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
