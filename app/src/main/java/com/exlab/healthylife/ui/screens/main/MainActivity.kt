@@ -1,9 +1,11 @@
-package com.exlab.healthylife.ui
+package com.exlab.healthylife.ui.screens.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
@@ -16,11 +18,13 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.exlab.healthylife.R
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity() {
 
     private val viewBinding by viewBinding(ActivityMainBinding::bind)
     private var navController: NavController? = null
     private val topLevelDestinations = setOf(getAuthDestination())
+    private val viewModel: MainViewModel by viewModels()
+
 
     private val fragmentListener = object : FragmentManager.FragmentLifecycleCallbacks() {
         override fun onFragmentViewCreated(
@@ -38,11 +42,22 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupSplashScreen()
+        installSplashScreen()
+        setContentView(R.layout.activity_main)
         val navController = getRootNavController()
         prepareRootNavController(false, navController)
         onNavControllerActivated(navController)
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, true)
         onBackPressedActivate(navController)
+    }
+
+    private fun setupSplashScreen() {
+        installSplashScreen().apply {
+            setKeepOnScreenCondition {
+                viewModel.isLoading.value
+            }
+        }
     }
 
     private fun onBackPressedActivate(navController: NavController) {

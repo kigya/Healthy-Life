@@ -4,26 +4,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.exlab.healthylife.R
-import com.exlab.healthylife.api.AccountsApi
 import com.exlab.healthylife.app.base.ui.BaseFragment
 import com.exlab.healthylife.databinding.FragmentSignUpBinding
 import com.exlab.healthylife.models.Account
-import com.exlab.healthylife.utils.Constants
 import com.exlab.healthylife.utils.observeEvent
 import com.exlab.healthylife.utils.validators.EmailValidator
 import com.exlab.healthylife.utils.validators.PasswordValidator
-import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.runBlocking
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
@@ -33,12 +25,11 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeState()
         observeGoBackEvent()
         observeShowSuccessSignUpMessageEvent()
 
         with(viewBinding) {
-           viewModel.signUp(Account(email = "hfhdjds@gmail.com", password = "sjsjsjsHqqh1"))
+            observeState()
             addBackButtonAction()
             observeEmail()
             observeEmailFocus()
@@ -46,13 +37,17 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
             observeDataProcessing()
             observeAgreePolicy()
             observeTripleValid()
-            bCreateAccount.setOnClickListener {
-                val accountData = Account(
-                    email = etEmail.text.toString(),
-                    password = etPassword.text.toString()
-                )
-                viewModel.signUp(accountData)
-            }
+            onCreateAccountPressed()
+        }
+    }
+
+    private fun FragmentSignUpBinding.onCreateAccountPressed() {
+        bCreateAccount.setOnClickListener {
+            val accountData = Account(
+                email = etEmail.text.toString(),
+                password = etPassword.text.toString()
+            )
+            viewModel.signUp(accountData)
         }
     }
 
@@ -135,19 +130,11 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
         )
     }
 
-    private fun onCreateAccountButtonPressed() {
-        val account = Account(
-            email = viewBinding.etEmail.text.toString(),
-            password = viewBinding.etPassword.text.toString(),
-        )
-        viewModel.signUp(account)
-    }
+    private fun FragmentSignUpBinding.observeState() = viewModel.state.observe(viewLifecycleOwner) { state ->
+        tilEmail.isEnabled = state.enableViews
+        tilPassword.isEnabled = state.enableViews
 
-    private fun observeState() = viewModel.state.observe(viewLifecycleOwner) { state ->
-        viewBinding.tilEmail.isEnabled = state.enableViews
-        viewBinding.tilPassword.isEnabled = state.enableViews
-
-        viewBinding.progressBar.visibility =
+        progressBar.visibility =
             if (state.showProgress) View.VISIBLE else View.INVISIBLE
     }
 

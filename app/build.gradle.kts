@@ -78,4 +78,8 @@ dependencies {
     implementation(Dependencies.OkHttp.logging)
 
     implementation(Dependencies.Activity.ktx)
+
+    implementation(Dependencies.SplashScreen.core)
+
+    implementation(Dependencies.RoundedProgressBar.core)
 }

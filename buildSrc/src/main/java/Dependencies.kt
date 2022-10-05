@@ -45,7 +45,8 @@ object Dependencies {
 
     object ViewBindingPropertyDelegate {
         private const val version = "1.5.6"
-        const val noreflection = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$version"
+        const val noreflection =
+            "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$version"
     }
 
     object NavigationComponent {
@@ -92,5 +93,15 @@ object Dependencies {
     object Activity {
         private const val version = "1.6.0"
         const val ktx = "androidx.activity:activity-ktx:$version"
+    }
+
+    object SplashScreen {
+        private const val version = "1.0.0"
+        const val core = "androidx.core:core-splashscreen:$version"
+    }
+
+    object RoundedProgressBar {
+        private const val version = "2.1.2"
+        const val core = "com.akexorcist:round-corner-progress-bar:$version"
     }
 }
