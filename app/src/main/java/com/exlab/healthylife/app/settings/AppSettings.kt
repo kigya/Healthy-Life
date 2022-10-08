@@ -2,8 +2,8 @@ package com.exlab.healthylife.app.settings
 
 interface AppSettings {
 
-    fun getCurrentUserEmail(): String?
+    fun getCurrentUserToken(): String?
 
-    fun setCurrentUserEmail(email: String?)
+    fun setCurrentUserToken(email: String?)
 
 }

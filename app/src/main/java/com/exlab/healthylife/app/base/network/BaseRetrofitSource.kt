@@ -1,9 +1,6 @@
 package com.exlab.healthylife.app.base.network
 
-import com.exlab.healthylife.utils.AppException
-import com.exlab.healthylife.utils.BackendException
-import com.exlab.healthylife.utils.ConnectionException
-import com.exlab.healthylife.utils.ParseBackendResponseException
+import com.exlab.healthylife.utils.*
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.JsonEncodingException
 import com.squareup.moshi.Moshi
@@ -41,7 +38,7 @@ open class BaseRetrofitSource(
             throw ParseBackendResponseException(e)
         // retrofit
         } catch (e: HttpException) {
-            throw createBackendException(e)
+            throw AccountAlreadyExistsException(e)
         // mostly retrofit
         } catch (e: IOException) {
             throw ConnectionException(e)

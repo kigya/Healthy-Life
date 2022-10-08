@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private val viewBinding by viewBinding(ActivityMainBinding::bind)
     private var navController: NavController? = null
-    private val topLevelDestinations = setOf(getAuthDestination())
+    private val topLevelDestinations = setOf(getAuthDestination(), getTabsDestination())
     private val viewModel: MainViewModel by viewModels()
 
 
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         setContentView(R.layout.activity_main)
         val navController = getRootNavController()
-        prepareRootNavController(false, navController)
+        prepareRootNavController(viewModel.isSignedIn(), navController)
         onNavControllerActivated(navController)
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, true)
         onBackPressedActivate(navController)
@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
         val graph = navController.navInflater.inflate(getMainNavigationGraphId())
         graph.setStartDestination(
             if (isSignedIn) {
-                return
+                getTabsDestination()
             } else {
                 getAuthDestination()
             }
@@ -125,4 +125,6 @@ class MainActivity : AppCompatActivity() {
     private fun getMainNavigationGraphId(): Int = R.navigation.main_graph
 
     private fun getAuthDestination(): Int = R.id.signUpFragmentIntro
+
+    private fun getTabsDestination(): Int = R.id.tabFragment
 }

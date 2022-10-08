@@ -17,14 +17,14 @@ class SharedPreferencesAppSettings @Inject constructor(
     private val sharedPreferences =
         appContext.getSharedPreferences("settings", Context.MODE_PRIVATE)
 
-    override fun setCurrentUserEmail(email: String?) {
+    override fun setCurrentUserToken(email: String?) {
         val editor = sharedPreferences.edit()
         if (email.isNullOrEmpty()) editor.remove(PREF_CURRENT_ACCOUNT_EMAIL)
         else editor.putString(PREF_CURRENT_ACCOUNT_EMAIL, email)
         editor.apply()
     }
 
-    override fun getCurrentUserEmail(): String? =
+    override fun getCurrentUserToken(): String? =
         sharedPreferences.getString(PREF_CURRENT_ACCOUNT_EMAIL, null)
 
     companion object {

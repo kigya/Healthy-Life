@@ -10,8 +10,9 @@ plugins {
     id(Plugins.kotlin) version "1.7.10" apply false
     id(Plugins.safeargas) version "2.4.2" apply false
     id(Plugins.googleHilt) version "2.43.2" apply false
+    kotlin("plugin.serialization") version "1.6.21"
 }
 
-tasks.register("clean",Delete::class){
+tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }

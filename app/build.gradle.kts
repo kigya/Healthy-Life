@@ -4,6 +4,9 @@ plugins {
     kotlin(Plugins.kapt)
     id(Plugins.safeargas)
     id(Plugins.hilt)
+    kotlin("plugin.serialization")
+    id("com.google.devtools.ksp").version("1.6.10-1.0.4")
+
 }
 
 android {
@@ -82,4 +85,7 @@ dependencies {
     implementation(Dependencies.SplashScreen.core)
 
     implementation(Dependencies.RoundedProgressBar.core)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
+    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
 }

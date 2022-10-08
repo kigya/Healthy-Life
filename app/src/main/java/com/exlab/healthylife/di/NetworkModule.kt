@@ -3,6 +3,7 @@ package com.exlab.healthylife.di
 import com.exlab.healthylife.app.settings.AppSettings
 import com.exlab.healthylife.utils.Constants
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,7 +28,7 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideMoshi(): Moshi {
-        return Moshi.Builder().build()
+        return Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
     }
 
     @Provides
@@ -52,7 +53,7 @@ class NetworkModule {
     private fun createAuthorizationInterceptor(settings: AppSettings): Interceptor {
         return Interceptor { chain ->
             val newBuilder = chain.request().newBuilder()
-            val token = settings.getCurrentUserEmail()
+            val token = settings.getCurrentUserToken()
             if (token != null) {
                 newBuilder.addHeader("Authorization", token)
             }

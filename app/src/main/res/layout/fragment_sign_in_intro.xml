@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/match_parent"
-    android:background="@color/white_base">
+    android:background="@color/white_base"
+    tools:context="com.exlab.healthylife.ui.screens.signin.SignInFragmentIntro">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"

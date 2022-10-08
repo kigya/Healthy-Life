@@ -15,10 +15,17 @@ class RetrofitAccountsSource @Inject constructor(
 
     private val accountsApi = retrofit.create(AccountsApi::class.java)
 
+    override suspend fun signIn(
+        email: String,
+        password: String
+    ) = wrapRetrofitExceptions {
+        val signInRequestEntity = Account(email, password)
+        accountsApi.signIn(signInRequestEntity)
+    }
+
     override suspend fun signUp(
         account: Account
     ) = wrapRetrofitExceptions {
-        delay(1000)
         accountsApi.signUp(account)
     }
 

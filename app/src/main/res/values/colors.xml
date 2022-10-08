@@ -14,9 +14,4 @@
     <color name="dark_gray">#6C6C70</color>
     <color name="coral_base">#FF7979</color>
 
-    <color name="main_color">#566EF6</color>
-    <color name="main_dark_color">#3F51B5</color>
-    <color name="text_color_gray">#7F7F8B</color>
-    <color name="Red">#FA1504</color>
-
 </resources>

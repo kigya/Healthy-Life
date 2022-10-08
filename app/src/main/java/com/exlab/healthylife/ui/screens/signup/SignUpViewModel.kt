@@ -68,7 +68,7 @@ class SignUpViewModel @Inject constructor(
         } catch (e: EmptyFieldException) {
             processEmptyFieldException(e)
         } catch (e: AccountAlreadyExistsException) {
-            processAccountAlreadyExistsException()
+           _showToastEvent.publishEvent(R.string.account_already_exists)
         } finally {
             hideProgress()
         }

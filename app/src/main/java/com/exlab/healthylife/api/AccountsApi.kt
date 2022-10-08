@@ -6,8 +6,8 @@ import retrofit2.http.POST
 
 interface AccountsApi {
 
-    @POST("user/register")
-    suspend fun signIn(@Body body: Account): Account
+    @POST("user/login")
+    suspend fun signIn(@Body body: Account)
 
     @POST("user/register")
     suspend fun signUp(@Body body: Account)

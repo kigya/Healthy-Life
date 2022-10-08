@@ -41,4 +41,6 @@
     <string name="sign_up_success">Готово!</string>
     <string name="action_logout">Выйти</string>
     <string name="error_email">Неверный адрес</string>
+    <string name="forgot_password"><u>Забыли пароль?</u></string>
+    <string name="invalid_email_or_password">Неверный логин или пароль</string>
 </resources>

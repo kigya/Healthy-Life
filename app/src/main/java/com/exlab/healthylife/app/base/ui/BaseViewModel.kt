@@ -32,6 +32,9 @@ open class BaseViewModel(
             } catch (e: BackendException) {
                 logError(e)
                 _showErrorMessageEvent.publishEvent(e.message ?: "")
+            } catch (e: ParseBackendResponseException) {
+                logError(e)
+                _showErrorMessageEvent.publishEvent(e.message ?: "Неверные данные")
             } catch (e: AuthException) {
                 logError(e)
                 _showAuthErrorAndRestartEvent.publishEvent()

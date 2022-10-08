@@ -20,7 +20,9 @@
         <activity
             android:name=".ui.screens.main.MainActivity"
             android:exported="true"
-            android:theme="@style/App.Starting">
+            android:screenOrientation="portrait"
+            android:theme="@style/App.Starting"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

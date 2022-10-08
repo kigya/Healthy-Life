@@ -3,11 +3,9 @@ package com.exlab.healthylife.repositories
 import com.exlab.healthylife.app.base.Result
 import com.exlab.healthylife.app.settings.AppSettings
 import com.exlab.healthylife.models.Account
-import com.exlab.healthylife.utils.AccountAlreadyExistsException
-import com.exlab.healthylife.utils.AuthException
-import com.exlab.healthylife.utils.BackendException
+import com.exlab.healthylife.models.UserField
+import com.exlab.healthylife.utils.*
 import com.exlab.healthylife.utils.async.LazyFlowSubject
-import com.exlab.healthylife.utils.wrapBackendExceptions
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -22,11 +20,25 @@ class AccountsRepository @Inject constructor(
         doGetAccount()
     }
 
-    /**
-     * Whether user is signed-in or not.
-     */
     fun isSignedIn(): Boolean {
-        return appSettings.getCurrentUserEmail() != null
+        return appSettings.getCurrentUserToken() != null
+    }
+
+    suspend fun signIn(email: String, password: String) {
+        if (email.isBlank()) throw EmptyFieldException(UserField.Email)
+        if (password.isBlank()) throw EmptyFieldException(UserField.Password)
+
+        try {
+            accountsSource.signIn(email, password)
+        } catch (e: Exception) {
+            if (e is BackendException && e.code == 400) {
+                throw InvalidCredentialsException(e)
+            } else {
+                throw e
+            }
+        }
+        appSettings.setCurrentUserToken(email)
+        accountLazyFlowSubject.updateAllValues(accountsSource.getAccount())
     }
 
     suspend fun signUp(account:Account) {
@@ -38,25 +50,13 @@ class AccountsRepository @Inject constructor(
         }
     }
 
-
-    /**
-     * Reload account info. Results of reloading are delivered to the flows
-     * returned by [getAccount] method.
-     */
     fun reloadAccount() {
         accountLazyFlowSubject.reloadAll()
     }
 
-    /**
-     * Get the account info of the current signed-in user and listen for all
-     * further changes of the account data.
-     * If user is not logged-in an empty result is emitted.
-     * @return infinite flow, always success; errors are wrapped to [Result]
-     */
     fun getAccount(): Flow<Result<Account>> {
         return accountLazyFlowSubject.listen(Unit)
     }
-
 
     private suspend fun doGetAccount(): Account = wrapBackendExceptions {
         try {
@@ -68,9 +68,8 @@ class AccountsRepository @Inject constructor(
         }
     }
 
-
     fun logout() {
-        appSettings.setCurrentUserEmail(null)
+        appSettings.setCurrentUserToken(null)
         accountLazyFlowSubject.updateAllValues(null)
     }
 

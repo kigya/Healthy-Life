@@ -12,6 +12,7 @@ import com.exlab.healthylife.R
 import com.exlab.healthylife.app.base.ui.BaseFragment
 import com.exlab.healthylife.databinding.FragmentSignUpBinding
 import com.exlab.healthylife.models.Account
+import com.exlab.healthylife.utils.extensions.hideKeyboard
 import com.exlab.healthylife.utils.observeEvent
 import com.exlab.healthylife.utils.validators.EmailValidator
 import com.exlab.healthylife.utils.validators.PasswordValidator
@@ -38,7 +39,19 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
             observeAgreePolicy()
             observeTripleValid()
             onCreateAccountPressed()
+            onLogInPressed()
         }
+    }
+
+    private fun FragmentSignUpBinding.onLogInPressed() {
+        tvcLogIn.setOnClickListener {
+            findNavController().navigate(R.id.action_signUpFragment_to_signInFragmentIntro)
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        hideKeyboard()
     }
 
     private fun FragmentSignUpBinding.onCreateAccountPressed() {
@@ -58,6 +71,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
     private fun FragmentSignUpBinding.observeAgreePolicy() {
         cbAgreePolicy.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setAgreePolicyActivated(isChecked)
+            hideKeyboard()
         }
     }
 
@@ -81,6 +95,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
     private fun FragmentSignUpBinding.observeDataProcessing() {
         cbAgreeDataProcessing.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setAgreeDataProcessingActivated(isChecked)
+            hideKeyboard()
         }
     }
 
@@ -130,13 +145,14 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
         )
     }
 
-    private fun FragmentSignUpBinding.observeState() = viewModel.state.observe(viewLifecycleOwner) { state ->
-        tilEmail.isEnabled = state.enableViews
-        tilPassword.isEnabled = state.enableViews
+    private fun FragmentSignUpBinding.observeState() =
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            tilEmail.isEnabled = state.enableViews
+            tilPassword.isEnabled = state.enableViews
 
-        progressBar.visibility =
-            if (state.showProgress) View.VISIBLE else View.INVISIBLE
-    }
+            progressBar.visibility =
+                if (state.showProgress) View.VISIBLE else View.INVISIBLE
+        }
 
     private fun observeShowSuccessSignUpMessageEvent() =
         viewModel.showToastEvent.observeEvent(viewLifecycleOwner) {
