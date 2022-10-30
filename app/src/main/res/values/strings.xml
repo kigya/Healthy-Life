@@ -7,7 +7,8 @@
     <string name="btnCreateAkk">Создать аккаунт</string>
     <string name="data_processing_conditions">условиями обработки данных</string>
     <string name="privacy_policy">политикой конфиденциальности</string>
-    <string name="enter_text">Войти</string>
+    <string name="enter_text">Вход</string>
+    <string name="enter_button_text">Войти</string>
     <string name="enter_text_one">или войти с помощью</string>
     <string name="image_secure">Image secure</string>
     <string name="register">Зарегистрироваться</string>
@@ -19,6 +20,7 @@
     <string name="already_have_an_account">Уже есть аккаунт?</string>
     <string name="log_in_underlined"><u>Войти</u></string>
     <string name="log_in">Войти</string>
+    <string name="log_in_error">Попробовать снова</string>
     <string name="password">Пароль</string>
     <string name="i_agree_with">Я согласен с</string>
     <string name="create_an_account">Создать аккаунт</string>
@@ -40,7 +42,7 @@
     <string name="account_already_exists">Аккаунт уже существует</string>
     <string name="sign_up_success">Готово!</string>
     <string name="action_logout">Выйти</string>
-    <string name="error_email">Неверный адрес</string>
+    <string name="error_email">Неверный формат почты</string>
     <string name="forgot_password"><u>Забыли пароль?</u></string>
     <string name="invalid_email_or_password">Неверный логин или пароль</string>
 </resources>

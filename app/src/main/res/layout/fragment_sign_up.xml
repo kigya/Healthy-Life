@@ -30,11 +30,13 @@
             android:src="@drawable/back_icon"
             app:layout_constraintBottom_toBottomOf="@id/tvTitle"
             app:layout_constraintStart_toEndOf="@id/guidelineStart"
-            app:layout_constraintTop_toTopOf="@id/tvTitle" />
+            app:layout_constraintTop_toTopOf="@id/tvTitle"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/tvTitle"
             style="@style/wrap_content"
+            android:fontFamily="@font/lato"
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/register"
             android:textSize="@dimen/text_size_big"
@@ -71,18 +73,23 @@
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@id/bBack"
+            android:fontFamily="@font/lato"
             app:placeholderText="johndoe@gmail.com">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/lato"
                 android:hint="@string/email_hint"
                 android:imeOptions="actionNext"
+                android:maxLength="65"
                 android:inputType="textEmailAddress"
                 android:lines="1"
                 android:textColorHighlight="@color/light_gray"
-                android:textCursorDrawable="@color/blue_base" />
+                android:textCursorDrawable="@null"
+                android:textColor="@color/black_base"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,22 +105,29 @@
             app:hintTextColor="@color/blue_base"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/tilEmail">
+            app:layout_constraintTop_toBottomOf="@id/tilEmail"
+            android:fontFamily="@font/lato"
+            app:placeholderText="Abcd4957">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/lato"
                 android:hint="@string/password"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
-                android:lines="1" />
+                android:lines="1"
+                android:textCursorDrawable="@null"
+                android:textColor="@color/black_base"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tvCapitalLetterRequirement"
             style="@style/wrap_content"
+            android:fontFamily="@font/lato"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
             android:drawablePadding="@dimen/text_margin_default"
@@ -128,6 +142,7 @@
         <TextView
             android:id="@+id/tvLowercaseLetterRequirement"
             style="@style/wrap_content"
+            android:fontFamily="@font/lato"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/text_margin_default"
             android:drawablePadding="@dimen/text_margin_default"
@@ -140,6 +155,7 @@
         <TextView
             android:id="@+id/tvDigitRequirement"
             style="@style/wrap_content"
+            android:fontFamily="@font/lato"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/text_margin_default"
             android:drawablePadding="@dimen/text_margin_default"
@@ -152,6 +168,7 @@
         <TextView
             android:id="@+id/tvCharsAmountRequirement"
             style="@style/wrap_content"
+            android:fontFamily="@font/lato"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/text_margin_default"
             android:drawablePadding="@dimen/text_margin_default"
@@ -188,9 +205,11 @@
             style="@style/wrap_content"
             android:layout_marginTop="@dimen/margin_minor"
             android:buttonTint="@color/blue_base"
+            android:fontFamily="@font/lato"
             android:text="@string/i_agree_with"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/barrierHints" />
+            app:layout_constraintTop_toBottomOf="@id/barrierHints"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/ctvDataProcessing"
@@ -198,6 +217,7 @@
             android:layout_marginStart="@dimen/text_margin_default"
             android:text="@string/data_processing_conditions"
             android:textColor="@color/blue_base"
+            android:fontFamily="@font/lato"
             app:layout_constraintBottom_toBottomOf="@id/cbAgreeDataProcessing"
             app:layout_constraintStart_toEndOf="@id/cbAgreeDataProcessing"
             app:layout_constraintTop_toTopOf="@id/cbAgreeDataProcessing" />
@@ -206,14 +226,17 @@
             android:id="@+id/cbAgreePolicy"
             style="@style/wrap_content"
             android:buttonTint="@color/blue_base"
+            android:fontFamily="@font/lato"
             android:text="@string/i_agree_with"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/cbAgreeDataProcessing" />
+            app:layout_constraintTop_toBottomOf="@id/cbAgreeDataProcessing"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/ctvPolicy"
             style="@style/wrap_content"
             android:layout_marginStart="@dimen/text_margin_default"
+            android:fontFamily="@font/lato"
             android:text="@string/privacy_policy"
             android:textColor="@color/blue_base"
             app:layout_constraintBottom_toBottomOf="@id/cbAgreePolicy"
@@ -227,18 +250,23 @@
             android:layout_marginBottom="@dimen/margin_medium"
             android:backgroundTint="@color/light_gray"
             android:clickable="false"
+            android:fontFamily="@font/lato"
             android:text="@string/create_an_account"
             android:textAllCaps="false"
             android:textColor="@color/white_base"
             app:cornerRadius="20dp"
             app:layout_constraintBottom_toTopOf="@id/tvAlreadyHaveAccount"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-            app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/ctvPolicy"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/tvAlreadyHaveAccount"
             style="@style/wrap_content"
             android:layout_marginEnd="@dimen/text_margin_default"
+            android:fontFamily="@font/lato"
             android:layout_marginBottom="@dimen/margin_major"
             android:text="@string/already_have_an_account"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -253,12 +281,14 @@
             android:layout_marginBottom="@dimen/margin_major"
             android:clickable="true"
             android:focusable="true"
+            android:fontFamily="@font/lato"
             android:text="@string/log_in_underlined"
             android:textColor="@color/blue_base"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@id/tvAlreadyHaveAccount" />
+            app:layout_constraintStart_toEndOf="@id/tvAlreadyHaveAccount"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

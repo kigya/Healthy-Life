@@ -11,9 +11,9 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainer"
-        style="@style/match_parent"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        app:navGraph="@navigation/main_graph"
-        app:defaultNavHost="true" />
+        style="@style/match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/main_graph" />
 
 </LinearLayout>
