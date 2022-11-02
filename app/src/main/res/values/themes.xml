@@ -5,11 +5,11 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/white_base</item>
         <item name="colorPrimaryVariant">@color/white_base</item>
-        <item name="colorOnPrimary">@color/dark_gray</item>
+        <item name="colorOnPrimary">@color/black_base</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black_base</item>
+        <item name="colorOnSecondary">@color/light_gray</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
