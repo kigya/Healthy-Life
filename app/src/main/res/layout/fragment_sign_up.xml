@@ -181,7 +181,7 @@
         <androidx.constraintlayout.widget.Group
             android:id="@+id/groupPasswordHints"
             style="@style/wrap_content"
-            android:visibility="visible"
+            android:visibility="gone"
             app:constraint_referenced_ids="
             tvCapitalLetterRequirement,
             tvCharsAmountRequirement,
@@ -248,7 +248,7 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginBottom="@dimen/margin_medium"
-            android:backgroundTint="@color/light_gray"
+            app:backgroundTint="@color/light_gray"
             android:clickable="false"
             android:fontFamily="@font/lato"
             android:text="@string/create_an_account"

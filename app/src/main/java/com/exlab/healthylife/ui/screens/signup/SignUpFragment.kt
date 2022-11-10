@@ -34,6 +34,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
             addBackButtonAction()
             observeEmail()
             observeEmailFocus()
+            observePasswordFocus()
             observePassword()
             observeDataProcessing()
             observeAgreePolicy()
@@ -44,6 +45,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
     }
 
     private fun FragmentSignUpBinding.onLogInPressed() {
+        observeEmailFocus()
         tvcLogIn.setOnClickListener {
             findNavController().navigate(R.id.action_signUpFragment_to_signInFragmentIntro)
         }
@@ -76,13 +78,26 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
     }
 
     private fun FragmentSignUpBinding.observeEmailFocus() {
-        etEmail.onFocusChangeListener = onFocusChangeListener()
+        etEmail.onFocusChangeListener = onFocusChangeListenerEmail()
     }
 
-    private fun FragmentSignUpBinding.onFocusChangeListener() =
+    private fun FragmentSignUpBinding.observePasswordFocus() {
+        etPassword.onFocusChangeListener = onFocusChangeListenerPassword()
+    }
+
+    private fun FragmentSignUpBinding.onFocusChangeListenerEmail() =
         View.OnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus && !EmailValidator.isValidEmail(etEmail.text.toString())) tilEmail.error =
-                getString(R.string.error_email) else tilEmail.error = null
+            if (!hasFocus && !EmailValidator.isValidEmail(etEmail.text.toString())) {
+                tilEmail.error =
+                    getString(R.string.error_email)
+                etEmail.setText(etEmail.text?.trim() ?: "")
+            } else tilEmail.error = null
+        }
+
+    private fun FragmentSignUpBinding.onFocusChangeListenerPassword() =
+        View.OnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) groupPasswordHints.visibility = View.VISIBLE
+            else groupPasswordHints.visibility = View.GONE
         }
 
     private fun FragmentSignUpBinding.observeEmail() {
@@ -124,7 +139,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
                         setBackgroundColor(requireContext().getColor(R.color.blue_base))
                         true
                     } else {
-                        setBackgroundColor(requireContext().getColor(R.color.dark_gray))
+                        setBackgroundColor(requireContext().getColor(R.color.light_gray))
                         false
                     }
             }
